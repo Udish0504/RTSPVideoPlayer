@@ -1,5 +1,6 @@
 package com.example.rtspvideoplayerassignment
 import androidx.media3.common.MediaItem
+import androidx.media3.common.MimeTypes
 import androidx.media3.exoplayer.ExoPlayer
 
 
@@ -12,7 +13,10 @@ class VideoStreamingUseCase(
     }
 
     fun startStreaming(rtspUrl: String) {
-        val mediaItem = MediaItem.fromUri(rtspUrl)
+        val mediaItem = MediaItem.Builder()
+            .setUri(rtspUrl)
+            .setMimeType(MimeTypes.APPLICATION_RTSP)
+            .build()
         exoPlayer.setMediaItem(mediaItem)
         exoPlayer.prepare()
         exoPlayer.playWhenReady = true
